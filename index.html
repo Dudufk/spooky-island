@@ -17,6 +17,8 @@
     --gold: #cba876;
     --paper: #ece3c6;
     --blood: #9a3b3b;
+    --glow-rgb: 124,232,171;
+    --paper-rgb: 236,227,198;
     --font-display: 'Cinzel', Georgia, 'Times New Roman', serif;
     --font-body: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-vhs: 'Special Elite', 'Courier New', monospace;
@@ -42,7 +44,42 @@
       radial-gradient(60% 45% at 20% 15%, rgba(124,232,171,0.10), transparent 60%),
       radial-gradient(50% 40% at 85% 80%, rgba(203,168,118,0.08), transparent 60%),
       radial-gradient(80% 60% at 50% 100%, rgba(15,38,32,0.9), var(--void) 70%);
+    transition: background 0.9s ease;
   }
+
+  /* MOOD: resort — abertura como anúncio de resort tropical, brilhante */
+  body[data-mood="resort"] {
+    --glow: #0f8a7c;
+    --glow-dim: #0d6d62;
+    --gold: #d99a2e;
+    --paper: #123a34;
+    --glow-rgb: 15,138,124;
+    --paper-rgb: 18,58,52;
+  }
+  body[data-mood="resort"] .bg-glow {
+    background:
+      radial-gradient(32% 22% at 50% 10%, rgba(255,244,214,0.95), rgba(255,221,150,0.35) 45%, transparent 72%),
+      radial-gradient(70% 45% at 50% 105%, rgba(15,138,124,0.30), transparent 70%),
+      linear-gradient(180deg, #eefaf4 0%, #dff3ea 32%, #c3e9dd 60%, #93d6c4 100%);
+  }
+  body[data-mood="resort"] .vhs,
+  body[data-mood="resort"] .grain { opacity: 0; }
+  body[data-mood="resort"] .stage { animation: none; }
+  body[data-mood="resort"] h1.headline,
+  body[data-mood="resort"] h2.title { text-shadow: none; }
+
+  /* MOOD: dusk — transição, o paraíso começa a escurecer */
+  body[data-mood="dusk"] .bg-glow {
+    background:
+      radial-gradient(38% 28% at 50% 12%, rgba(255,163,102,0.45), transparent 62%),
+      radial-gradient(70% 50% at 50% 105%, rgba(60,20,45,0.55), transparent 70%),
+      linear-gradient(180deg, #2c1b2c 0%, #4a2438 32%, #63273a 58%, #35202a 82%, var(--void) 100%);
+  }
+  body[data-mood="dusk"] .vhs { opacity: 0.18; }
+  body[data-mood="dusk"] .grain { opacity: 0.03; }
+  body[data-mood="dusk"] .stage { animation: none; }
+
+  body { transition: color 0.6s ease; }
 
   /* VHS scanlines + noise */
   .vhs {
@@ -136,7 +173,8 @@
     line-height: 1.14;
     margin: 0 0 18px;
     color: var(--paper);
-    text-shadow: 0 0 28px rgba(124,232,171,0.25);
+    text-shadow: 0 0 28px rgba(var(--glow-rgb),0.25);
+    transition: color 0.6s ease, text-shadow 0.6s ease;
   }
   h2.title {
     font-family: var(--font-display);
@@ -144,14 +182,16 @@
     font-size: clamp(1.5rem, 4.5vw, 2.1rem);
     margin: 0 0 20px;
     color: var(--paper);
-    text-shadow: 0 0 20px rgba(124,232,171,0.18);
+    text-shadow: 0 0 20px rgba(var(--glow-rgb),0.18);
+    transition: color 0.6s ease, text-shadow 0.6s ease;
   }
 
   p.body-text {
     font-size: 1.02rem;
     line-height: 1.65;
-    color: rgba(236,227,198,0.85);
+    color: rgba(var(--paper-rgb),0.85);
     margin: 0 0 14px;
+    transition: color 0.6s ease;
   }
   p.body-text.tight { margin-bottom: 4px; }
   .copy-block { margin-bottom: 26px; text-align: left; }
@@ -263,11 +303,11 @@
     font-family: var(--font-display); font-weight: 700; font-size: 0.95rem;
     letter-spacing: 0.04em; padding: 16px 30px;
     background: var(--glow); color: #05130f;
-    box-shadow: 0 0 0 1px rgba(124,232,171,0.4), 0 8px 30px rgba(124,232,171,0.18);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 0 0 1px rgba(var(--glow-rgb),0.4), 0 8px 30px rgba(var(--glow-rgb),0.18);
+    transition: transform 0.15s ease, box-shadow 0.4s ease, background 0.4s ease;
     text-transform: uppercase;
   }
-  .cta:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(124,232,171,0.6), 0 12px 36px rgba(124,232,171,0.28); }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(var(--glow-rgb),0.6), 0 12px 36px rgba(var(--glow-rgb),0.28); }
   .cta:focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; }
   .cta.full { width: 100%; }
 
@@ -277,18 +317,18 @@
   }
   .dot {
     width: 7px; height: 7px; border-radius: 50%;
-    background: rgba(236,227,198,0.25); border: none; cursor: pointer; padding: 0;
-    transition: background 0.25s ease, transform 0.25s ease;
+    background: rgba(var(--paper-rgb),0.3); border: none; cursor: pointer; padding: 0;
+    transition: background 0.4s ease, transform 0.25s ease;
   }
   .dot.active { background: var(--glow); transform: scale(1.35); }
   .dot:focus-visible { outline: 2px solid var(--glow); outline-offset: 3px; }
 
   .arrow-btn {
     position: fixed; top: 50%; transform: translateY(-50%); z-index: 6;
-    background: none; border: 1px solid rgba(236,227,198,0.25); color: var(--paper);
+    background: none; border: 1px solid rgba(var(--paper-rgb),0.3); color: var(--paper);
     width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.05rem;
     display: flex; align-items: center; justify-content: center;
-    transition: border-color 0.2s ease, opacity 0.2s ease;
+    transition: border-color 0.4s ease, opacity 0.2s ease, color 0.4s ease;
   }
   .arrow-btn:hover { border-color: var(--glow); }
   .arrow-btn:disabled { opacity: 0; pointer-events: none; }
@@ -299,14 +339,16 @@
   .step-hint {
     position: fixed; top: calc(20px + env(safe-area-inset-top, 0px)); left: 50%;
     transform: translateX(-50%); font-family: var(--font-vhs); font-size: 0.68rem;
-    letter-spacing: 0.12em; color: rgba(236,227,198,0.4); z-index: 6;
+    letter-spacing: 0.12em; color: rgba(var(--paper-rgb),0.5); z-index: 6;
+    transition: color 0.4s ease;
   }
 
   .sound-toggle {
     position: fixed; top: calc(20px + env(safe-area-inset-top, 0px)); right: 16px; z-index: 6;
-    background: none; border: 1px solid rgba(236,227,198,0.25); color: var(--paper);
+    background: none; border: 1px solid rgba(var(--paper-rgb),0.3); color: var(--paper);
     width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 0.95rem;
     display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.4s ease, color 0.4s ease;
   }
   .sound-toggle:hover { border-color: var(--glow); }
 
@@ -348,10 +390,29 @@
   .success-box { display: none; text-align: center; }
   .success-box.active { display: block; }
   .success-box .glyph { font-size: 2.2rem; margin-bottom: 14px; }
+
+  .logo-mark {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto 20px;
+    text-align: center;
+  }
+  .logo-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    filter: drop-shadow(0 6px 18px rgba(0,0,0,0.35));
+  }
+  @media (max-width: 640px) {
+    .logo-mark { max-width: 400px; margin-bottom: 14px; }
+  }
 </style>
 </head>
 <body>
-
+<audio id="backgroundMusic" loop>
+  <source src="Simple_Plan.mp3" type="audio/mpeg">
+</audio>
 <div class="bg-glow"></div>
 <div class="grain"></div>
 <div class="vhs"></div>
@@ -367,16 +428,21 @@
 
   <!-- 1: A CHAMADA -->
   <section class="section active" data-index="0">
-    <div class="kicker">Spooky Island apresenta · Uma noite fora do comum</div>
+    <div class="logo-mark">
+      <img class="logo-img" id="logoImg" alt="Logo da festa"
+        src="logo.png">
+    </div>
+    <div class="kicker">Apresenta · Uma noite fora do comum</div>
     <h1 class="headline">Há lugares que você visita.<br>Há lugares que você nunca deveria ter visitado.</h1>
     <div class="copy-block center">
       <p class="body-text">E há Spooky Island.</p>
       <p class="body-text">Neste Halloween, os portões d'O Sítio serão abertos para uma noite de mistérios, criaturas, música e decisões que provavelmente parecerão excelentes até a manhã seguinte.</p>
     </div>
-    <div class="detail-line">25 DE OUTUBRO · A PARTIR DAS 18H</div>
+    <div class="detail-line">24 DE OUTUBRO · A PARTIR DAS 18H</div>
     <p class="quote">"Você está convidado. Infelizmente."</p>
     <button class="cta" data-next>Entrar na ilha</button>
   </section>
+
 
   <!-- 2: O DESTINO -->
   <section class="section" data-index="1">
@@ -385,7 +451,7 @@
     <div class="copy-block center">
       <p class="body-text">Esqueça os resorts cinco estrelas.<br>Esqueça as praias paradisíacas.<br>Esqueça a possibilidade de sair daqui exatamente como entrou.</p>
       <p class="body-text">Por uma única noite, O Sítio se transforma em uma ilha perdida no meio do nada, onde antigas forças sobrenaturais aguardam silenciosamente pelo momento certo de despertar.</p>
-      <p class="body-text">E aparentemente, esse momento é 25 de outubro.</p>
+      <p class="body-text">E aparentemente, esse momento é 24 de outubro.</p>
     </div>
     <p class="quote">O Sítio — porque "ilha tropical amaldiçoada" estava fora do orçamento.</p>
     <button class="cta" data-next>Continuar</button>
@@ -434,12 +500,12 @@
     <div class="copy-block center">
       <p class="body-text">Existe apenas uma regra absoluta em Spooky Island.</p>
     </div>
-    <div class="detail-line" style="font-size:1rem;">VENHA FANTASIADO</div>
+    <div class="detail-line" style="font-size:1rem;">VENHA FANTASIADO · TEMA SCOOBY-DOO</div>
     <div class="copy-block center">
-      <p class="body-text">Não importa se você será uma criatura das trevas, uma entidade inexplicável ou algo que ninguém consiga identificar.</p>
-      <p class="body-text">Fantasia é obrigatória.</p>
+      <p class="body-text">Não vale qualquer fantasia. Aqui a exigência é clara: monstros, vilões, mistérios ou detetives — contanto que venham direto do universo de Scooby-Doo, seja do desenho clássico ou dos filmes.</p>
+      <p class="body-text">Fantasia temática é obrigatória.</p>
     </div>
-    <p class="quote">Aparecer sem fantasia em uma ilha amaldiçoada é, no mínimo, uma péssima estratégia de sobrevivência. E, sinceramente, estraga o clima.</p>
+    <p class="quote">Aparecer com uma fantasia fora do tema em uma ilha dedicada a Scooby-Doo é, no mínimo, uma pista maldita. E, sinceramente, estraga o clima.</p>
     <button class="cta" data-next>Escolher minha identidade</button>
   </section>
 
@@ -447,7 +513,7 @@
   <section class="section" data-index="5">
     <div class="kicker">O ritual</div>
     <h2 class="title">O ritual começa às 18h</h2>
-    <div class="detail-line" style="font-size:1rem;">25 DE OUTUBRO</div>
+    <div class="detail-line" style="font-size:1rem;">24 DE OUTUBRO</div>
     <div class="copy-block center">
       <p class="body-text">Quando o sol começar a desaparecer, os portões d'O Sítio serão abertos.</p>
       <p class="body-text">A partir das 18h, criaturas de todos os tipos estarão autorizadas a entrar.</p>
@@ -467,9 +533,9 @@
     </div>
     <div class="final-list">
       <div class="final-row"><span class="glyph">📍</span><span>O Sítio</span></div>
-      <div class="final-row"><span class="glyph">📅</span><span>25 de outubro</span></div>
+      <div class="final-row"><span class="glyph">📅</span><span>24 de outubro</span></div>
       <div class="final-row"><span class="glyph">🕕</span><span>A partir das 18h</span></div>
-      <div class="final-row"><span class="glyph">👻</span><span>Fantasia obrigatória</span></div>
+      <div class="final-row"><span class="glyph">👻</span><span>Fantasia temática (Scooby-Doo) obrigatória</span></div>
     </div>
     <div class="map-links">
       <a class="link-btn" href="https://maps.app.goo.gl/u4eE2Sodi9vCe5qP7" target="_blank" rel="noopener">Ver no Maps</a>
@@ -510,7 +576,7 @@
     </form>
     <div class="success-box" id="successBox">
       <div class="glyph">🕯️</div>
-      <p class="body-text">Sua travessia foi registrada. Nos vemos em 25 de outubro, quando o véu se abrir.</p>
+      <p class="body-text">Sua travessia foi registrada. Nos vemos em 24 de outubro, quando o véu se abrir.</p>
     </div>
   </section>
 
@@ -541,12 +607,19 @@
   }
   var dots = Array.prototype.slice.call(dotsWrap.children);
 
+  function moodForIndex(idx) {
+    if (idx === 0) return 'resort';
+    if (idx === 1) return 'dusk';
+    return 'dark';
+  }
+
   function render() {
     sections.forEach(function (s, i) { s.classList.toggle('active', i === current); });
     dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
     prevBtn.disabled = current === 0;
     nextBtn.disabled = current === total - 1;
     stepHint.textContent = (current + 1) + ' / ' + total;
+    document.body.setAttribute('data-mood', moodForIndex(current));
   }
 
   function goTo(idx) {
@@ -555,7 +628,7 @@
     if (reduceMotion) { current = idx; render(); return; }
 
     fog.classList.add('show');
-    if (Math.random() < 0.6) {
+    if (moodForIndex(idx) === 'dark' && Math.random() < 0.6) {
       subliminal.textContent = subliminalWords[Math.floor(Math.random() * subliminalWords.length)];
       subliminal.classList.remove('flash');
       void subliminal.offsetWidth;
@@ -571,61 +644,53 @@
   prevBtn.addEventListener('click', function () { goTo(current - 1); });
   nextBtn.addEventListener('click', function () { goTo(current + 1); });
   document.querySelectorAll('[data-next]').forEach(function (btn) {
-    btn.addEventListener('click', function () { goTo(current + 1); });
+  btn.addEventListener('click', function () {
+
+    // Começa a música ao entrar na ilha
+    if (current === 0 && !soundOn) {
+      startMusic();
+    }
+
+    goTo(current + 1);
   });
+});
   document.addEventListener('keydown', function (e) {
     if (e.key === 'ArrowRight') goTo(current + 1);
     if (e.key === 'ArrowLeft') goTo(current - 1);
   });
   render();
 
-  // Ambient drone toggle (Web Audio, no external files)
-  var audioCtx = null;
-  var droneNodes = null;
-  var soundOn = false;
-  var soundToggle = document.getElementById('soundToggle');
+ // Música ambiente
+var backgroundMusic = document.getElementById('backgroundMusic');
+var soundOn = false;
+var soundToggle = document.getElementById('soundToggle');
 
-  function startDrone() {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    var osc1 = audioCtx.createOscillator();
-    var osc2 = audioCtx.createOscillator();
-    var gain = audioCtx.createGain();
-    var lfo = audioCtx.createOscillator();
-    var lfoGain = audioCtx.createGain();
+backgroundMusic.volume = 0.35;
 
-    osc1.type = 'sine'; osc1.frequency.value = 55;
-    osc2.type = 'sine'; osc2.frequency.value = 55.8;
-    lfo.type = 'sine'; lfo.frequency.value = 0.12;
-    lfoGain.gain.value = 0.025;
-    gain.gain.value = 0.0001;
+function startMusic() {
+  backgroundMusic.play()
+    .then(function () {
+      soundOn = true;
+      soundToggle.textContent = '🔊';
+    })
+    .catch(function (error) {
+      console.log('Não foi possível iniciar a música:', error);
+    });
+}
 
-    lfo.connect(lfoGain);
-    lfoGain.connect(gain.gain);
-    osc1.connect(gain);
-    osc2.connect(gain);
-    gain.connect(audioCtx.destination);
+function stopMusic() {
+  backgroundMusic.pause();
+  soundOn = false;
+  soundToggle.textContent = '🔇';
+}
 
-    osc1.start(); osc2.start(); lfo.start();
-    gain.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + 1.2);
-    droneNodes = { osc1: osc1, osc2: osc2, lfo: lfo, gain: gain };
+soundToggle.addEventListener('click', function () {
+  if (soundOn) {
+    stopMusic();
+  } else {
+    startMusic();
   }
-
-  function stopDrone() {
-    if (!droneNodes) return;
-    var g = droneNodes.gain;
-    var now = audioCtx.currentTime;
-    g.gain.linearRampToValueAtTime(0.0001, now + 0.6);
-    setTimeout(function () {
-      droneNodes.osc1.stop(); droneNodes.osc2.stop(); droneNodes.lfo.stop();
-      droneNodes = null;
-    }, 650);
-  }
-
-  soundToggle.addEventListener('click', function () {
-    soundOn = !soundOn;
-    soundToggle.textContent = soundOn ? '🔊' : '🔇';
-    if (soundOn) { startDrone(); } else { stopDrone(); }
-  });
+});
 
   // RSVP -> WhatsApp
   var form = document.getElementById('rsvpForm');
