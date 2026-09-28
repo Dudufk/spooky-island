@@ -197,26 +197,11 @@
                 display: block;
             }
 
-        /* SKULL DANCE — aparece como fundo da seção do mistério */
-        .section.has-skull-video {
-            position: relative;
-            min-height: min(72vh, 680px);
-            display: none;
-            isolation: isolate;
-            overflow: hidden;
-            border-radius: 18px;
-        }
-
-        .section.has-skull-video.active {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
+        /* SKULL DANCE — vídeo ocupa o fundo inteiro da tela enquanto a seção estiver ativa */
         .skull-video-wrap {
-            position: absolute;
+            position: fixed;
             inset: -8%;
-            z-index: -2;
+            z-index: -1;
             overflow: hidden;
             pointer-events: none;
         }
@@ -233,7 +218,6 @@
         .skull-video-overlay {
             position: absolute;
             inset: 0;
-            z-index: -1;
             background:
                 radial-gradient(circle at 50% 42%, rgba(7,22,19,0.10), rgba(7,22,19,0.78) 72%),
                 linear-gradient(180deg, rgba(7,22,19,0.30), rgba(7,22,19,0.88));
@@ -257,11 +241,6 @@
         }
 
         @media (max-width: 640px) {
-            .section.has-skull-video {
-                min-height: 72vh;
-                padding: 28px 12px;
-            }
-
             .skull-video {
                 filter: brightness(0.24) contrast(1.15) saturate(0.7);
             }
