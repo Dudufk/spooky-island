@@ -85,7 +85,7 @@
 
         /* MOOD: dusk — transição, o paraíso começa a escurecer */
         body[data-mood="dusk"] .bg-glow {
-            background-image: linear-gradient( rgba(7, 22, 19, 0.60), rgba(7, 22, 19, 0.72) ), url("fundo_tribais.jpeg");
+            background-image: linear-gradient( rgba(7, 22, 19, 0.60), rgba(7, 22, 19, 0.72) ), url("lual_tiki.jfif");
             background-position: center center;
             background-size: cover;
             background-repeat: no-repeat;
@@ -210,9 +210,35 @@
             margin: auto;
         }
 
-            .section.active {
-                display: block;
+        .section.active {
+            display: block;
+        }
+
+        /* FUNDO TRIBAL VERDE — Página 4: O AVISO */
+        .section[data-index="3"] {
+            position: relative;
+            isolation: isolate;
+        }
+
+            .section[data-index="3"]::before {
+                content: '';
+                position: fixed;
+                inset: 0;
+                z-index: -2;
+                background-image: url("fundo_tribais.jpeg"); /*fundo_tribais_verde.jpeg*/
+                background-position: center center;
+                background-size: cover;
+                background-repeat: no-repeat;
             }
+
+        .section[data-index="3"]::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: linear-gradient( rgba(7, 22, 19, 0.68), rgba(7, 22, 19, 0.80) );
+            pointer-events: none;
+        }
 
         /* SKULL DANCE — vídeo ocupa o fundo inteiro da tela enquanto a seção estiver ativa */
         .skull-video-wrap {
