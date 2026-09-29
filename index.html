@@ -65,27 +65,30 @@
             --paper-rgb: 18,58,52;
         }
 
-            body[data-mood="resort"] .bg-glow {
-                background: radial-gradient(32% 22% at 50% 10%, rgba(255,244,214,0.95), rgba(255,221,150,0.35) 45%, transparent 72%), radial-gradient(70% 45% at 50% 105%, rgba(15,138,124,0.30), transparent 70%), linear-gradient(180deg, #eefaf4 0%, #dff3ea 32%, #c3e9dd 60%, #93d6c4 100%);
-            }
+        body[data-mood="resort"] .bg-glow {
+            background: radial-gradient(32% 22% at 50% 10%, rgba(255,244,214,0.95), rgba(255,221,150,0.35) 45%, transparent 72%), radial-gradient(70% 45% at 50% 105%, rgba(15,138,124,0.30), transparent 70%), linear-gradient(180deg, #eefaf4 0%, #dff3ea 32%, #c3e9dd 60%, #93d6c4 100%);
+        }
 
-            body[data-mood="resort"] .vhs,
-            body[data-mood="resort"] .grain {
-                opacity: 0;
-            }
+        body[data-mood="resort"] .vhs,
+        body[data-mood="resort"] .grain {
+            opacity: 0;
+        }
 
-            body[data-mood="resort"] .stage {
-                animation: none;
-            }
+        body[data-mood="resort"] .stage {
+            animation: none;
+        }
 
-            body[data-mood="resort"] h1.headline,
-            body[data-mood="resort"] h2.title {
-                text-shadow: none;
-            }
+        body[data-mood="resort"] h1.headline,
+        body[data-mood="resort"] h2.title {
+            text-shadow: none;
+        }
 
         /* MOOD: dusk — transição, o paraíso começa a escurecer */
         body[data-mood="dusk"] .bg-glow {
-            background: radial-gradient(38% 28% at 50% 12%, rgba(255,163,102,0.45), transparent 62%), radial-gradient(70% 50% at 50% 105%, rgba(60,20,45,0.55), transparent 70%), linear-gradient(180deg, #2c1b2c 0%, #4a2438 32%, #63273a 58%, #35202a 82%, var(--void) 100%);
+            background-image: linear-gradient( rgba(7, 22, 19, 0.60), rgba(7, 22, 19, 0.72) ), url("fundo_tribais.jpeg");
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
         }
 
         body[data-mood="dusk"] .vhs {
@@ -97,7 +100,21 @@
         }
 
         body[data-mood="dusk"] .stage {
-            animation: none;
+            position: relative;
+        }
+
+        body[data-mood="dusk"] .section[data-index="1"] {
+            position: relative;
+            z-index: 1;
+        }
+
+        body[data-mood="dusk"] .section[data-index="1"] .title {
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.95), 0 0 30px rgba(0, 0, 0, 0.65);
+        }
+
+        body[data-mood="dusk"] .section[data-index="1"] .body-text,
+        body[data-mood="dusk"] .section[data-index="1"] .quote {
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95);
         }
 
         body {
@@ -218,9 +235,7 @@
         .skull-video-overlay {
             position: absolute;
             inset: 0;
-            background:
-                radial-gradient(circle at 50% 42%, rgba(7,22,19,0.10), rgba(7,22,19,0.78) 72%),
-                linear-gradient(180deg, rgba(7,22,19,0.30), rgba(7,22,19,0.88));
+            background: radial-gradient(circle at 50% 42%, rgba(7,22,19,0.10), rgba(7,22,19,0.78) 72%), linear-gradient(180deg, rgba(7,22,19,0.30), rgba(7,22,19,0.88));
         }
 
         .section.has-skull-video .kicker,
