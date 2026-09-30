@@ -214,31 +214,38 @@
                 display: block;
             }
 
-            /* FUNDO TRIBAL VERDE — Página 4: O AVISO */
-            .section[data-index="3"] {
-                position: relative;
-                isolation: isolate;
+        body[data-section="5"] .bg-glow {
+            background-image: linear-gradient( rgba(7, 22, 19, 0.68), rgba(7, 22, 19, 0.80) ), url("tiki_vulcao.webp");
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        /* FUNDO TRIBAL VERDE — Página 4: O AVISO */
+        .section[data-index="3"] {
+            position: relative;
+            isolation: isolate;
+        }
+
+            .section[data-index="3"]::before {
+                content: '';
+                position: fixed;
+                inset: 0;
+                z-index: -2;
+                background-image: url("fundo_tribais.jpeg");
+                background-position: center center;
+                background-size: cover;
+                background-repeat: no-repeat;
             }
 
-                .section[data-index="3"]::before {
-                    content: '';
-                    position: fixed;
-                    inset: 0;
-                    z-index: -2;
-                    background-image: url("fundo_tribais.jpeg"); /*fundo_tribais_verde.jpeg*/
-                    background-position: center center;
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                }
-
-                .section[data-index="3"]::after {
-                    content: '';
-                    position: fixed;
-                    inset: 0;
-                    z-index: -1;
-                    background: linear-gradient( rgba(7, 22, 19, 0.68), rgba(7, 22, 19, 0.80) );
-                    pointer-events: none;
-                }
+            .section[data-index="3"]::after {
+                content: '';
+                position: fixed;
+                inset: 0;
+                z-index: -1;
+                background: linear-gradient( rgba(7, 22, 19, 0.68), rgba(7, 22, 19, 0.80) );
+                pointer-events: none;
+            }
 
         /* CORRIDA DA TURMA DO SCOOBY-DOO */
         #scooby-runner {
@@ -944,12 +951,23 @@
             <div class="copy-block center">
                 <p class="body-text">Existe apenas uma regra absoluta em Spooky Island.</p>
             </div>
-            <div class="detail-line" style="font-size:1rem;">VENHA FANTASIADO · TEMA SCOOBY-DOO</div>
+            <div class="detail-line" style="font-size:1rem;">VENHA FANTASIADO · TEMA SCOOBY-DOO: ILHA DO ESPANTO</div>
             <div class="copy-block center">
-                <p class="body-text">Não vale qualquer fantasia. Aqui a exigência é clara: monstros, vilões, mistérios ou detetives — contanto que venham direto do universo de Scooby-Doo, seja do desenho clássico ou dos filmes.</p>
-                <p class="body-text">Fantasia temática é obrigatória.</p>
+                <p class="body-text">
+                    A ilha exige um disfarce. O tema da noite é o primeiro filme de Scooby-Doo:
+                    <strong>Ilha do Espanto.</strong>
+                </p>
+                <p class="body-text">
+                    Use sua criatividade. Você pode se inspirar nos personagens, criaturas,
+                    vilões, mistérios ou em qualquer elemento marcante da ilha.
+                    <strong>Não tenha medo de inventar.</strong>
+                </p>
+                <p class="body-text">Fantasia temática é obrigatória. Criatividade é mais que bem-vinda.</p>
             </div>
-            <p class="quote">Aparecer com uma fantasia fora do tema em uma ilha dedicada a Scooby-Doo é, no mínimo, uma pista maldita. E, sinceramente, estraga o clima.</p>
+            <p class="quote">
+                Afinal, aparecer em Spooky Island sem uma boa fantasia é como investigar
+                um mistério sem o Scooby. Pode até funcionar... mas ninguém vai entender.
+            </p>
             <button class="cta" data-next>Escolher minha identidade</button>
         </section>
 
@@ -1050,6 +1068,7 @@
                 nextBtn.disabled = current === total - 1;
                 stepHint.textContent = (current + 1) + ' / ' + total;
                 document.body.setAttribute('data-mood', moodForIndex(current));
+                document.body.setAttribute('data-section', current);
             }
 
             function goTo(idx) {
